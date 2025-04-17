@@ -3,6 +3,7 @@ package com.example.crud.controller;
 import com.example.crud.dto.request.ApiResponse;
 import com.example.crud.dto.request.UserCreationRequest;
 import com.example.crud.dto.request.UserUpdateRequest;
+import com.example.crud.dto.response.UserResponse;
 import com.example.crud.entity.User;
 import com.example.crud.service.UserService;
 import jakarta.validation.Valid;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/mydatabase/users")
+
 public class UserController {
     @Autowired
     private UserService userService;
@@ -26,16 +28,23 @@ public class UserController {
 
     @GetMapping
     List<User> getUsers() {
+
         return userService.getUsers();
     }
 
+    //    @GetMapping("/{userId}")
+//    UserResponse getUser(@PathVariable("userId") String userId) {
+//
+//        return userService.getUser(userId);
+//    }
     @GetMapping("/{userId}")
-    User getUser(@PathVariable("userId") String userId) {
+    UserResponse getUser(@PathVariable("userId") String userId) {
+
         return userService.getUser(userId);
     }
 
     @PutMapping("/{userId}")
-    User updateUser(@RequestBody UserUpdateRequest request, @PathVariable String userId) {
+    UserResponse updateUser(@RequestBody UserUpdateRequest request, @PathVariable String userId) {
         return userService.updateUser(userId, request);
     }
 
